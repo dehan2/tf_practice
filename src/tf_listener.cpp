@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 	turtle.request.name = "turtle2";
 	spawner.call(turtle);
 
-	ros::publisher turtle_vel = node.advertise<geometry_msgs::Twist>("turtle2/cmd_vel", 10);
+	ros::Publisher turtle_vel = node.advertise<geometry_msgs::Twist>("turtle2/cmd_vel", 10);
 
 	tf2_ros ::Buffer tfBuffer;
 	tf2_ros::TransformListener tfListener(tfBuffer);
@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 		{
 			transformStamped = tfBuffer.lookupTransform("turtle2", "turtle1", ros::Time(0));
 		}
-		catch (tf2::transformException &ex)
+		catch (tf2::TransformException &ex)
 		{
 			ROS_WARN("%s", ex.what());
 			ros::Duration(1.0).sleep();
